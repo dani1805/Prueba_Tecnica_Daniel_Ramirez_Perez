@@ -1,1 +1,13 @@
-{}
+{
+    "login-page": {
+        "hint-email": "Introduce un correo electrónico",
+        "hint-password": "Introduce una contraseña",
+        "sign-in": "Iniciar sesión"
+    },
+
+    "errors": {
+        "empty-error": "Este campo es obligatorio",
+        "email-error": "Introduce un correo electrónico válido",
+        "password-error": "Introduce una contraseña válida"
+    }
+}

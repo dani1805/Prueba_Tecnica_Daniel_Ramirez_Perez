@@ -11,7 +11,11 @@ class Validators {
     return null;
   }
 
-  static String? validatePassword(String? password, String emptyError, String error) {
+  static String? validatePassword(
+    String? password,
+    String emptyError,
+    String error,
+  ) {
     if (password == null || password.isEmpty) return emptyError;
     if (password.length < 8 || password.length > 20) return error;
     if (!_checkPassword(password)) return error;
@@ -19,47 +23,11 @@ class Validators {
   }
 
   static bool _checkPassword(String? password) {
-    final specialChars = [
-      '@',
-      '!',
-      '#',
-      '.',
-      ',',
-      r'$',
-      '€',
-      '%',
-      '&',
-      '(',
-      ')',
-      '_',
-      '+',
-      '-',
-      '=',
-      '|',
-      '<',
-      '>',
-      '?',
-      '¿',
-      '¡',
-      '{',
-      '}',
-      '[',
-      ']',
-      '~',
-      '^',
-      '*'
-    ];
-
     if (!password!.contains(RegExp('[A-Z]'))) return false;
     if (!password.contains(RegExp('[a-z]'))) return false;
     if (!password.contains(RegExp('[0-9]'))) return false;
 
-    var charFound = false;
-    for (final char in specialChars) {
-      if (password.contains(char)) charFound = true;
-    }
-
-    return charFound;
+    return true;
   }
 
   static String? validateEmpty(String? field, String error) {
@@ -68,9 +36,7 @@ class Validators {
   }
 
   static String? validatePhone(String? phone, String emptyError, String error) {
-    final _pattern = RegExp(
-      r'^[0-9]+$',
-    );
+    final _pattern = RegExp(r'^[0-9]+$');
 
     if (phone == null || phone.isEmpty) return emptyError;
     if (phone.length >= 14 || phone.length <= 8) return error;
@@ -79,9 +45,16 @@ class Validators {
     return null;
   }
 
-  static String? validateRepeatPassword(String? repeatPassword, String password, String emptyError, String invalidError, String error) {
+  static String? validateRepeatPassword(
+    String? repeatPassword,
+    String password,
+    String emptyError,
+    String invalidError,
+    String error,
+  ) {
     if (repeatPassword == null || repeatPassword.isEmpty) return emptyError;
-    if (repeatPassword.length < 8 || repeatPassword.length > 20) return invalidError;
+    if (repeatPassword.length < 8 || repeatPassword.length > 20)
+      return invalidError;
     if (repeatPassword != password) return error;
     if (!_checkPassword(repeatPassword)) return error;
     return null;

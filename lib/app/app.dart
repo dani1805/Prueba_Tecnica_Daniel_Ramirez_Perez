@@ -1,5 +1,6 @@
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_cubit.dart';
-import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_page.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_page.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<AuthenticationCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => AuthenticationCubit()),
+        BlocProvider(create: (_) => LoginBloc()),
+      ],
       child: MaterialApp(
         navigatorKey: _key,
         localizationsDelegates: context.localizationDelegates,
@@ -38,7 +42,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         builder: (context, child) {
           return BlocListener<AuthenticationCubit, AuthenticationState>(
             listener: (context, state) {
-              navigator.pushAndRemoveUntil(HomePage.route(), (route) => false);
+              navigator.pushAndRemoveUntil(LoginPage.route(), (route) => false);
             },
             child: child,
           );

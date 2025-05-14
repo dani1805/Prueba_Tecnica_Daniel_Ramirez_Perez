@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/api/dio_helper.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_cubit.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/config/environment.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,10 +13,11 @@ class ServiceLocator {
   static void setup(Environment environment) {
     getIt.registerSingleton<Dio>(DioHelper.build(environment.baseUrl));
 
-    //REPOSITORIES
-    //CUBITS
+    // REPOSITORIES
+    // BLOCS
     getIt.registerLazySingleton<AuthenticationCubit>(
       () => AuthenticationCubit(),
     );
+    getIt.registerFactory<LoginBloc>(() => LoginBloc());
   }
 }
