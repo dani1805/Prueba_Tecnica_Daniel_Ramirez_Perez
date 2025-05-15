@@ -5,7 +5,6 @@ import 'package:prueba_tecnica_daniel_ramirez/app/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:prueba_tecnica_daniel_ramirez/config/service_locator.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -27,6 +26,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         BlocProvider(create: (_) => LoginBloc()),
       ],
       child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: Colors.black,
+          ),
+          appBarTheme: const AppBarTheme(color: Colors.black),
+        ),
         navigatorKey: _key,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,

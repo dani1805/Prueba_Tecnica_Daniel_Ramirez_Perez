@@ -6,7 +6,7 @@
     },
 
     "errors": {
-        "empty-error": "Este campo es obligatorio",
+        "empty-error": "Campo obligatorio",
         "email-error": "Introduce un correo electrónico válido",
         "password-error": "Introduce una contraseña válida"
     }

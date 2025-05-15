@@ -1,10 +1,13 @@
 {
-    "validateEmptyError": "This field is mandatory",
-    "validateEmailIncorrect": "Enter a valid email address",
-    "hintEmail": "Enter an email address",
-    "validatePasswordIncorrect": "Enter a valid password",
-    "hintPassword": "Enter a password",
-    "textDoLogin": "Login"
+    "login-page": {
+        "hint-email": "Enter an email address",
+        "hint-password": "Enter a password",
+        "sign-in": "Login"
+    },
 
-
+    "errors": {
+        "empty-error": "Field mandatory",
+        "email-error": "Enter a valid email address",
+        "password-error": "Enter a valid password"
+    }
 }

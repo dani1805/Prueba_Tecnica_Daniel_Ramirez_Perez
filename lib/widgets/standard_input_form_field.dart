@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class StandardInputFormField extends StatelessWidget {
   const StandardInputFormField({
-    Key? key,
+    super.key,
     this.validator,
     this.controller,
     this.type = TextInputType.text,
@@ -17,7 +16,7 @@ class StandardInputFormField extends StatelessWidget {
     this.onPressed,
     this.label,
     this.enabledBorder,
-  }) : super(key: key);
+  });
 
   final String? Function(String?)? validator;
   final TextEditingController? controller;
