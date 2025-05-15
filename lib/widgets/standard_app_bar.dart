@@ -34,6 +34,7 @@ class StandardAppBar extends StatelessWidget implements PreferredSize {
       centerTitle: false,
       actions: [
         PopupMenuButton<String>(
+          icon: Icon(Icons.menu, color: Colors.white),
           onSelected: (String item) {
             bloc.add(DoChangeLanguage(context: context, value: item));
           },
