@@ -1,4 +1,6 @@
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_cubit.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/language/language_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_page.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/splash/splash_page.dart';
@@ -24,8 +26,10 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       providers: [
         BlocProvider(create: (_) => AuthenticationCubit()),
         BlocProvider(create: (_) => LoginBloc()),
+        BlocProvider(create: (_) => LanguageBloc()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
+        locale: context.locale,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
             secondary: Colors.black,
@@ -41,7 +45,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
               return supportedLocale;
             }
           }
-          return const Locale('es');
+          return const Locale('en');
         },
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
@@ -49,7 +53,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             listener: (context, state) {
               navigator.pushAndRemoveUntil(LoginPage.route(), (route) => false);
             },
-            child: child,
+            child: BlocBuilder<LanguageBloc, LanguageState>(
+              builder: (context, state) => child ?? const SizedBox.shrink(),
+            ),
           );
         },
         onGenerateRoute: (_) => SplashPage.route(),

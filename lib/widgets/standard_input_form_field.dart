@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 
 class StandardInputFormField extends StatelessWidget {
   const StandardInputFormField({
@@ -10,12 +11,10 @@ class StandardInputFormField extends StatelessWidget {
     this.hint,
     this.isObscureText = false,
     this.obscureText = false,
-    this.errorBorder,
     this.color,
     this.enabled,
     this.onPressed,
     this.label,
-    this.enabledBorder,
   });
 
   final String? Function(String?)? validator;
@@ -26,10 +25,8 @@ class StandardInputFormField extends StatelessWidget {
   final String? label;
   final bool isObscureText;
   final bool obscureText;
-  final InputBorder? errorBorder;
   final Color? color;
   final bool? enabled;
-  final OutlineInputBorder? enabledBorder;
   final Function()? onPressed;
 
   @override
@@ -42,9 +39,32 @@ class StandardInputFormField extends StatelessWidget {
       onChanged: onChanged,
       obscureText: obscureText,
       decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+        ),
         hintText: hint,
         labelText: label,
-        enabledBorder: enabledBorder,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: Colors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: Colors.red),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+        ),
         hintStyle: TextStyle(color: color, fontSize: 12),
         errorMaxLines: 3,
         suffixIcon:

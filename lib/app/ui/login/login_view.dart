@@ -1,6 +1,7 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/assets.dart';
@@ -54,7 +55,9 @@ class _LoginViewState extends State<LoginView> {
             ErrorHandler.handler(context, code, message);
             break;
           case LoginSuccess:
-            print('LOGIN-SUCCESS');
+            if (kDebugMode) {
+              print('LOGIN-SUCCESS');
+            }
             break;
         }
       },
@@ -65,11 +68,7 @@ class _LoginViewState extends State<LoginView> {
           default:
             return Scaffold(
               backgroundColor: Colors.white,
-              appBar: StandardAppBar(
-                isBack: true,
-                elevation: 0,
-                background: MColor.blue,
-              ),
+              appBar: StandardAppBar(elevation: 0, background: MColor.blue),
               body: Container(
                 width: size.width,
                 height: size.height,
@@ -96,9 +95,6 @@ class _LoginViewState extends State<LoginView> {
                             controller: emailController,
                             type: TextInputType.emailAddress,
                             hint: 'login-page.hint-email'.tr(),
-                            errorBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
                             color: Colors.black,
                           ),
                           SizedBox(height: 20),
@@ -118,9 +114,6 @@ class _LoginViewState extends State<LoginView> {
                                 () => isPasswordVisible = !isPasswordVisible,
                               );
                             },
-                            errorBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
                             color: Colors.black,
                           ),
                           SizedBox(height: 50),

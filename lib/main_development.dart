@@ -24,6 +24,7 @@ void main() {
 
     runApp(
       EasyLocalization(
+        startLocale: Locale('en'),
         supportedLocales: const [Locale('es'), Locale('en')],
         useOnlyLangCode: true,
         path: 'assets/translations',
