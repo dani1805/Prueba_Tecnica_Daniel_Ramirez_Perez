@@ -8,6 +8,15 @@
     "errors": {
         "empty-error": "Campo obligatorio",
         "email-error": "Introduce un correo electrónico válido",
-        "password-error": "La contraseña debe tener al menos 8 caracteres, al menos ha de haber un numero, una letra en minuscula y otra en mayuscula"
+        "password-error": "La contraseña debe tener al menos 8 caracteres, al menos ha de haber un número, una letra en minúscula y otra en mayúscula"
+    },
+
+    "home-page": {
+        "title-tab-london": "Londres",
+        "title-tab-singapur": "Singapur",
+        "title-tab-toronto": "Toronto",
+        "title-tab-contact": "Contacto",
+
+        "send": "Enviar"
     }
 }

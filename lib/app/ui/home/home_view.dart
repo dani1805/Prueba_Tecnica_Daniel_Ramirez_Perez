@@ -1,10 +1,12 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/error_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/form_contact.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_app_bar.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_loading.dart';
@@ -16,13 +18,16 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
   late Size size;
   late AuthenticationBloc authenticationBloc;
+  late TabController tabController;
 
   @override
-  void dispose() {
-    super.dispose();
+  void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    super.initState();
   }
 
   @override
@@ -44,7 +49,6 @@ class _HomeViewState extends State<HomeView> {
             ErrorHandler.handler(context, code, message);
             break;
           case HomeSuccess:
-            print('HOME');
             break;
         }
       },
@@ -68,58 +72,63 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
-              body: Container(
-                width: size.width,
-                height: size.height,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    SingleChildScrollView(
-                      child: DefaultTabController(
-                        length: 4,
-                        child: TabBar(
-                          tabs: [
-                            Tab(
-                              child: Text(
-                                'Londres',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.5,
-                                ),
-                              ),
+              body: DefaultTabController(
+                length: 4,
+                child: Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    bottom: TabBar(
+                      indicatorColor: MColor.blue,
+                      labelColor: MColor.blue,
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            'home-page.title-tab-london'.tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
                             ),
-                            Tab(
-                              child: Text(
-                                'Singapur',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.5,
-                                ),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                'Toronto',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.5,
-                                ),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                'Contacto',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.5,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Tab(
+                          child: Text(
+                            'home-page.title-tab-singapur'.tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'home-page.title-tab-toronto'.tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'home-page.title-tab-contact'.tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                  body: TabBarView(
+                    //controller: tabController,
+                    children: [
+                      SizedBox.shrink(), //TODO
+                      SizedBox.shrink(), //TODO
+                      SizedBox.shrink(), //TODO
+                      FormContact(),
+                    ],
+                  ),
                 ),
               ),
             );

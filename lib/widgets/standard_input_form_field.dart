@@ -41,17 +41,17 @@ class StandardInputFormField extends StatelessWidget {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+          borderSide: BorderSide(width: 2.0, color: Colors.grey),
         ),
         hintText: hint,
         labelText: label,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+          borderSide: BorderSide(width: 2.0, color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+          borderSide: BorderSide(width: 2.0, color: Colors.grey),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -63,7 +63,7 @@ class StandardInputFormField extends StatelessWidget {
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(width: 2.0, color: MColor.blue),
+          borderSide: BorderSide(width: 2.0, color: Colors.grey),
         ),
         hintStyle: TextStyle(color: color, fontSize: 12),
         errorMaxLines: 3,
@@ -79,7 +79,6 @@ class StandardInputFormField extends StatelessWidget {
                 : null,
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // ignore: deprecated_member_use
       toolbarOptions: const ToolbarOptions(
         copy: true,
         paste: true,
