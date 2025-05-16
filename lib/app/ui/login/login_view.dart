@@ -1,13 +1,13 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/assets.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/error_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/validators.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_app_bar.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_button.dart';
@@ -31,6 +31,7 @@ class _LoginViewState extends State<LoginView> {
 
   late Size size;
   late LoginBloc bloc;
+  late AuthenticationBloc authenticationBloc;
 
   @override
   void dispose() {
@@ -43,9 +44,13 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     bloc = BlocProvider.of<LoginBloc>(context, listen: true);
+    authenticationBloc = BlocProvider.of<AuthenticationBloc>(
+      context,
+      listen: true,
+    );
 
     return BlocConsumer<LoginBloc, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         switch (state.runtimeType) {
           case LoginError:
             state = state as LoginError;
@@ -55,9 +60,7 @@ class _LoginViewState extends State<LoginView> {
             ErrorHandler.handler(context, code, message);
             break;
           case LoginSuccess:
-            if (kDebugMode) {
-              print('LOGIN-SUCCESS');
-            }
+            authenticationBloc.add(DoAuthenticated(value: 'app-token'));
             break;
         }
       },

@@ -33,29 +33,33 @@ class StandardAppBar extends StatelessWidget implements PreferredSize {
       titleTextStyle: const TextStyle(fontSize: 16),
       centerTitle: false,
       actions: [
-        PopupMenuButton<String>(
-          icon: Icon(Icons.menu, color: Colors.white),
-          onSelected: (String item) {
-            bloc.add(DoChangeLanguage(context: context, value: item));
-          },
-          itemBuilder:
-              (BuildContext context) => <PopupMenuEntry<String>>[
-                PopupMenuItem<String>(
-                  value: 'es',
-                  child: StandardLanguageItem(
-                    image: Assets.appSpanishIcon,
-                    title: 'ES',
+        Padding(
+          padding: EdgeInsets.only(right: 10),
+          child: PopupMenuButton<String>(
+            icon: Icon(Icons.menu, color: Colors.white),
+            onSelected: (String item) {
+              bloc.add(DoChangeLanguage(context: context, value: item));
+            },
+            itemBuilder:
+                (BuildContext context) => <PopupMenuEntry<String>>[
+                  PopupMenuItem<String>(
+                    value: 'es',
+                    child: StandardLanguageItem(
+                      image: Assets.appSpanishIcon,
+                      title: 'ES',
+                    ),
                   ),
-                ),
-                PopupMenuItem<String>(
-                  value: 'en',
-                  child: StandardLanguageItem(
-                    image: Assets.appEnglishIcon,
-                    title: 'EN',
+                  PopupMenuItem<String>(
+                    value: 'en',
+                    child: StandardLanguageItem(
+                      image: Assets.appEnglishIcon,
+                      title: 'EN',
+                    ),
                   ),
-                ),
-              ],
+                ],
+          ),
         ),
+        if (actions != null) ...actions!,
       ],
     );
   }

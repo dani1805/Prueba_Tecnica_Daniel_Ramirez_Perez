@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_void_async
 
-import 'package:bloc/bloc.dart';
+/*import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/api/prefs.dart';
 
@@ -30,4 +30,4 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     await Prefs.setStringValue('', EnumPrefs.TOKEN);
     check();
   }
-}
+}*/

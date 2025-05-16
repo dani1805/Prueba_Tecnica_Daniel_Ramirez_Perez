@@ -8,6 +8,6 @@
     "errors": {
         "empty-error": "Field mandatory",
         "email-error": "Enter a valid email address",
-        "password-error": "Enter a valid password"
+        "password-error": "The password must be at least 8 characters long, there must be at least one number, one lower case letter and one upper case letter."
     }
 }

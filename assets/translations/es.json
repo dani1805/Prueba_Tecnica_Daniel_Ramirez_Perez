@@ -8,6 +8,6 @@
     "errors": {
         "empty-error": "Campo obligatorio",
         "email-error": "Introduce un correo electrónico válido",
-        "password-error": "Introduce una contraseña válida"
+        "password-error": "La contraseña debe tener al menos 8 caracteres, al menos ha de haber un numero, una letra en minuscula y otra en mayuscula"
     }
 }

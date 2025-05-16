@@ -1,5 +1,9 @@
+// ignore_for_file: type_literal_in_constant_pattern
+
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_cubit.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_page.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/language/language_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_page.dart';
@@ -24,9 +28,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => AuthenticationCubit()),
+        BlocProvider(
+          create: (_) => AuthenticationBloc()..add(DoCheckAuthentication()),
+        ),
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => LanguageBloc()),
+        BlocProvider(create: (_) => HomeBloc()),
       ],
       child: GetMaterialApp(
         locale: context.locale,
@@ -49,9 +56,21 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         },
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
-          return BlocListener<AuthenticationCubit, AuthenticationState>(
-            listener: (context, state) {
-              navigator.pushAndRemoveUntil(LoginPage.route(), (route) => false);
+          return BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) async {
+              switch (state.runtimeType) {
+                case AuthenticationUnauthenticated:
+                  await navigator.pushAndRemoveUntil(
+                    LoginPage.route(),
+                    (route) => false,
+                  );
+                  break;
+                case AuthenticationAuthenticated:
+                  await navigator.pushAndRemoveUntil(
+                    HomePage.route(),
+                    (route) => false,
+                  );
+              }
             },
             child: BlocBuilder<LanguageBloc, LanguageState>(
               builder: (context, state) => child ?? const SizedBox.shrink(),

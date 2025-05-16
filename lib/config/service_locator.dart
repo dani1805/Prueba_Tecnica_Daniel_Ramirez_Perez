@@ -2,7 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/api/dio_helper.dart';
-import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_cubit.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/language/language_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/config/environment.dart';
@@ -16,10 +17,9 @@ class ServiceLocator {
 
     // REPOSITORIES
     // BLOCS
-    getIt.registerLazySingleton<AuthenticationCubit>(
-      () => AuthenticationCubit(),
-    );
+    getIt.registerLazySingleton<AuthenticationBloc>(() => AuthenticationBloc());
     getIt.registerFactory<LoginBloc>(() => LoginBloc());
     getIt.registerFactory<LanguageBloc>(() => LanguageBloc());
+    getIt.registerFactory<HomeBloc>(() => HomeBloc());
   }
 }
