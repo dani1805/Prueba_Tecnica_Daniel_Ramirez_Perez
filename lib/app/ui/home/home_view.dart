@@ -3,12 +3,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/data/entity/models/weather_response_model.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/dialog.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/error_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/form_contact.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/weather_screen.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_app_bar.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_loading.dart';
 
@@ -23,13 +25,31 @@ class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   late Size size;
   late AuthenticationBloc authenticationBloc;
-
+  late HomeBloc homeBloc;
+  late WeatherResponseModel weatherResponseModel;
   late TabController tabController;
 
   @override
   void initState() {
-    tabController = TabController(length: 4, vsync: this);
     super.initState();
+    tabController = TabController(length: 4, vsync: this);
+    tabController.addListener(handleTabControllerSelection);
+  }
+
+  void handleTabControllerSelection() {
+    if (tabController.indexIsChanging) {
+      switch (tabController.index) {
+        case 0:
+          doGetWeather(51.6195, -0.3337);
+          break;
+        case 1:
+          doGetWeather(1.3963, 103.8009);
+          break;
+        case 2:
+          doGetWeather(43.7677, -79.4659);
+          break;
+      }
+    }
   }
 
   @override
@@ -39,6 +59,8 @@ class _HomeViewState extends State<HomeView>
       context,
       listen: true,
     );
+    homeBloc = BlocProvider.of<HomeBloc>(context, listen: true);
+    weatherResponseModel = homeBloc.weatherResponseModel;
 
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) async {
@@ -81,6 +103,7 @@ class _HomeViewState extends State<HomeView>
                   appBar: AppBar(
                     backgroundColor: Colors.white,
                     bottom: TabBar(
+                      controller: tabController,
                       indicatorColor: MColor.blue,
                       labelColor: MColor.blue,
                       tabs: [
@@ -124,11 +147,11 @@ class _HomeViewState extends State<HomeView>
                     ),
                   ),
                   body: TabBarView(
-                    //controller: tabController,
+                    controller: tabController,
                     children: [
-                      SizedBox.shrink(), //TODO
-                      SizedBox.shrink(), //TODO
-                      SizedBox.shrink(), //TODO
+                      WeatherScreen(weatherResponseModel: weatherResponseModel),
+                      WeatherScreen(weatherResponseModel: weatherResponseModel),
+                      WeatherScreen(weatherResponseModel: weatherResponseModel),
                       FormContact(),
                     ],
                   ),
@@ -149,5 +172,9 @@ class _HomeViewState extends State<HomeView>
       context: context,
       content: Text('form-contact.text-dialog-sent-to'.tr()),
     );
+  }
+
+  void doGetWeather(double lat, double lon) {
+    homeBloc.add(DoGetWeather(lat: lat, lon: lon));
   }
 }

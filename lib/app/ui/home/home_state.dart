@@ -16,6 +16,13 @@ class HomeLoading extends HomeState {
   List<Object?> get props => [];
 }
 
+class HomeLoaded extends HomeState {
+  const HomeLoaded();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class HomeSuccess extends HomeState {
   @override
   List<Object?> get props => [];

@@ -111,14 +111,19 @@ class _FormContactState extends State<FormContact> {
               ),
               SizedBox(height: 50),
 
-              if (key.currentState != null && key.currentState!.validate())
-                StandardButton(
-                  text: 'form-contact.button-send-form-contact'.tr(),
-                  color: Colors.white,
-                  background: MColor.blue,
-                  border: MColor.blue,
-                  onTap: doSendFormContact,
-                ),
+              StandardButton(
+                text: 'form-contact.button-send-form-contact'.tr(),
+                color: Colors.white,
+                background:
+                    key.currentState != null && key.currentState!.validate()
+                        ? MColor.blue
+                        : MColor.blue.withOpacity(0.3),
+                border: MColor.blue,
+                onTap:
+                    key.currentState != null && key.currentState!.validate()
+                        ? doSendFormContact
+                        : () {},
+              ),
             ],
           ),
         ),

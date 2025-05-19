@@ -1,6 +1,7 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/domain/weather_repository_impl.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_page.dart';
@@ -11,6 +12,7 @@ import 'package:prueba_tecnica_daniel_ramirez/app/ui/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:prueba_tecnica_daniel_ramirez/config/service_locator.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -29,11 +31,17 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => AuthenticationBloc()..add(DoCheckAuthentication()),
+          create:
+              (_) => getIt<AuthenticationBloc>()..add(DoCheckAuthentication()),
         ),
-        BlocProvider(create: (_) => LoginBloc()),
-        BlocProvider(create: (_) => LanguageBloc()),
-        BlocProvider(create: (_) => HomeBloc()),
+        BlocProvider(create: (_) => getIt<LoginBloc>()),
+        BlocProvider(create: (_) => getIt<LanguageBloc>()),
+        BlocProvider(
+          create:
+              (_) =>
+                  getIt<HomeBloc>()
+                    ..add(DoGetWeather(lat: 51.6195, lon: -0.3337)),
+        ),
       ],
       child: GetMaterialApp(
         locale: context.locale,

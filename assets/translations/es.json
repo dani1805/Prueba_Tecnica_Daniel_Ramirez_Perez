@@ -28,7 +28,7 @@
         "hint-date": "Fecha de nacimiento",
         "hint-city": "Ciudad",
         "hint-phone": "Número de teléfono",
-        "hint-email": "Correo electrónico",
+        "hint-email": "Email",
         "button-send-form-contact": "Enviar",
         "text-dialog-sent-to": "Enviado"
     }
