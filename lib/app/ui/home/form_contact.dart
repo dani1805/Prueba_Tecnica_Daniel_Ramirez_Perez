@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/validators.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_button.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_input_form_field.dart';
 
@@ -23,8 +25,12 @@ class _FormContactState extends State<FormContact> {
 
   DateTime? dateOfBirth;
 
+  late HomeBloc homeBloc;
+
   @override
   Widget build(BuildContext context) {
+    homeBloc = BlocProvider.of<HomeBloc>(context, listen: true);
+
     return Container(
       padding: EdgeInsets.all(15),
       child: Form(
@@ -35,12 +41,14 @@ class _FormContactState extends State<FormContact> {
             children: [
               StandardInputFormField(
                 validator:
-                    (value) =>
-                        Validators.validateEmpty(value, 'Campo obligatorio'),
+                    (value) => Validators.validateEmpty(
+                      value,
+                      'errors.empty-error'.tr(),
+                    ),
                 controller: nameController,
                 type: TextInputType.text,
                 onChanged: (value) {},
-                hint: 'Nombre',
+                hint: 'form-contact.hint-name'.tr(),
                 color: Colors.black,
               ),
               SizedBox(height: 20),
@@ -48,12 +56,14 @@ class _FormContactState extends State<FormContact> {
                 onTap: () => doShowDatePicker(),
                 child: StandardInputFormField(
                   validator:
-                      (value) =>
-                          Validators.validateEmpty(value, 'Campo obligatorio'),
+                      (value) => Validators.validateEmpty(
+                        value,
+                        'errors.empty-error'.tr(),
+                      ),
                   controller: dateOfBirthController,
                   type: TextInputType.text,
                   onChanged: (value) {},
-                  hint: 'Fecha de nacimiento',
+                  hint: 'form-contact.hint-date'.tr(),
                   color: Colors.black,
                   enabled: false,
                 ),
@@ -61,12 +71,14 @@ class _FormContactState extends State<FormContact> {
               SizedBox(height: 20),
               StandardInputFormField(
                 validator:
-                    (value) =>
-                        Validators.validateEmpty(value, 'Campo obligatorio'),
+                    (value) => Validators.validateEmpty(
+                      value,
+                      'errors.empty-error'.tr(),
+                    ),
                 controller: cityController,
                 type: TextInputType.text,
                 onChanged: (value) {},
-                hint: 'Ciudad',
+                hint: 'form-contact.hint-city'.tr(),
                 color: Colors.black,
               ),
               SizedBox(height: 20),
@@ -74,13 +86,13 @@ class _FormContactState extends State<FormContact> {
                 validator:
                     (value) => Validators.validatePhone(
                       value,
-                      'Campo obligatorio',
+                      'errors.empty-error'.tr(),
                       'Introduzca un número de teléfono válido',
                     ),
                 controller: phoneController,
                 type: TextInputType.phone,
                 onChanged: (value) {},
-                hint: 'Número de teléfono',
+                hint: 'form-contact.hint-phone'.tr(),
                 color: Colors.black,
               ),
               SizedBox(height: 20),
@@ -94,24 +106,28 @@ class _FormContactState extends State<FormContact> {
                 controller: emailController,
                 type: TextInputType.emailAddress,
                 onChanged: (value) {},
-                hint: 'login-page.hint-email'.tr(),
+                hint: 'form-contact.hint-email'.tr(),
                 color: Colors.black,
               ),
               SizedBox(height: 50),
 
               if (key.currentState != null && key.currentState!.validate())
                 StandardButton(
-                  text: 'home-page.send'.tr(),
+                  text: 'form-contact.button-send-form-contact'.tr(),
                   color: Colors.white,
                   background: MColor.blue,
                   border: MColor.blue,
-                  onTap: () {},
+                  onTap: doSendFormContact,
                 ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void doSendFormContact() {
+    homeBloc.add(DoSendFormContact());
   }
 
   void doShowDatePicker() async {
@@ -122,8 +138,8 @@ class _FormContactState extends State<FormContact> {
       initialDate: DateTime.now(),
       firstDate: DateTime(1800),
       lastDate: DateTime.now(),
-      confirmText: 'Confirmar',
-      cancelText: 'Cancelar',
+      confirmText: 'date-picker.button-confirm-date'.tr(),
+      cancelText: 'date-picker.button-cancel-date'.tr(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(

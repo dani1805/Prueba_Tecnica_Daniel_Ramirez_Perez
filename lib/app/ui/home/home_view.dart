@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/helpers/dialog.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/error_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/form_contact.dart';
@@ -22,6 +23,7 @@ class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   late Size size;
   late AuthenticationBloc authenticationBloc;
+
   late TabController tabController;
 
   @override
@@ -49,6 +51,7 @@ class _HomeViewState extends State<HomeView>
             ErrorHandler.handler(context, code, message);
             break;
           case HomeSuccess:
+            doShowDialog();
             break;
         }
       },
@@ -139,5 +142,12 @@ class _HomeViewState extends State<HomeView>
 
   void doUnauthenticated() {
     authenticationBloc.add(DoUnauthenticated());
+  }
+
+  Future<void> doShowDialog() async {
+    MDialog.show(
+      context: context,
+      content: Text('form-contact.text-dialog-sent-to'.tr()),
+    );
   }
 }

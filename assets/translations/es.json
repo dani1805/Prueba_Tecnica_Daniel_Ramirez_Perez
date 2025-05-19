@@ -6,17 +6,30 @@
     },
 
     "errors": {
-        "empty-error": "Campo obligatorio",
+        "empty-error": "*Campo obligatorio",
         "email-error": "Introduce un correo electrónico válido",
-        "password-error": "La contraseña debe tener al menos 8 caracteres, al menos ha de haber un número, una letra en minúscula y otra en mayúscula"
+        "password-error": "Su contraseña debe contener 8 caracteres como mínimo, y debe incluir 1 cifra, 1 minúscula y 1 mayúscula"
     },
 
     "home-page": {
         "title-tab-london": "Londres",
         "title-tab-singapur": "Singapur",
         "title-tab-toronto": "Toronto",
-        "title-tab-contact": "Contacto",
+        "title-tab-contact": "Contacto"
+    },
 
-        "send": "Enviar"
+    "date-picker": {
+        "button-confirm-date": "Confirmar",
+        "button-cancel-date": "Cancelar"
+    },
+
+    "form-contact": {
+        "hint-name": "Nombre",
+        "hint-date": "Fecha de nacimiento",
+        "hint-city": "Ciudad",
+        "hint-phone": "Número de teléfono",
+        "hint-email": "Correo electrónico",
+        "button-send-form-contact": "Enviar",
+        "text-dialog-sent-to": "Enviado"
     }
 }

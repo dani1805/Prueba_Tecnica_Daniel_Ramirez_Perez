@@ -6,17 +6,30 @@
     },
 
     "errors": {
-        "empty-error": "Field mandatory",
+        "empty-error": "*Field mandatory",
         "email-error": "Enter a valid email address",
-        "password-error": "The password must be at least 8 characters long, there must be at least one number, one lower case letter and one upper case letter."
+        "password-error": "Your password must be at least 8 characters long, and must include 1 digit, 1 lowercase letter and 1 uppercase letter"
     },
 
     "home-page": {
         "title-tab-london": "London",
         "title-tab-singapur": "Singapore",
         "title-tab-toronto": "Toronto",
-        "title-tab-contact": "Contact",
+        "title-tab-contact": "Contact"
+    },
 
-        "send": "Send"
+    "date-picker": {
+        "button-confirm-date": "Confirm",
+        "button-cancel-date": "Cancel"
+    },
+
+    "form-contact": {
+        "hint-name": "Name",
+        "hint-date": "Date of birth",
+        "hint-city": "City",
+        "hint-phone": "Telephone number",
+        "hint-email": "Email",
+        "button-send-form-contact": "Send",
+        "text-dialog-sent-to": "Sent to"
     }
 }
