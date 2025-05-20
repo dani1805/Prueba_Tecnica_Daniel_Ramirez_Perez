@@ -104,7 +104,7 @@ class _HomeViewState extends State<HomeView>
                     backgroundColor: Colors.white,
                     bottom: TabBar(
                       controller: tabController,
-                      indicatorColor: MColor.blue,
+                      indicatorColor: Colors.transparent,
                       labelColor: MColor.blue,
                       tabs: [
                         Tab(
@@ -175,6 +175,8 @@ class _HomeViewState extends State<HomeView>
   }
 
   void doGetWeather(double lat, double lon) {
-    homeBloc.add(DoGetWeather(lat: lat, lon: lon));
+    homeBloc.add(
+      DoGetWeather(lat: lat, lon: lon, lang: context.locale.languageCode),
+    );
   }
 }

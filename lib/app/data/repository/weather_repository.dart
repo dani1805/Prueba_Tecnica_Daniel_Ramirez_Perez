@@ -8,10 +8,15 @@ class WeatherRepository extends WeatherRepositoryImpl {
   final apiWeatherRepository = ApiWeatherRequestImpl();
 
   @override
-  Future<WeatherResponseModel> getWeather(double lat, double lon) async {
+  Future<WeatherResponseModel> getWeather(
+    double lat,
+    double lon,
+    String lang,
+  ) async {
     final weatherResponseServerModel = await apiWeatherRepository.getWeather(
       lat,
       lon,
+      lang,
     );
     final weatherResponseModel = WeatherResponseModel.fromServer(
       weatherResponseServerModel,

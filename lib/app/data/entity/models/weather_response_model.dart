@@ -14,7 +14,7 @@ class WeatherResponseModel {
     current:
         serverModel.current != null
             ? CurrentModel.fromServer(serverModel.current!)
-            : CurrentModel(temp: 0, weather: []),
+            : CurrentModel(temp: 0, windSpeed: 0, uvi: 0, weather: []),
     daily:
         serverModel.daily != null
             ? List<DailyModel>.from(

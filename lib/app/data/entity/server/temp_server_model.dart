@@ -1,5 +1,5 @@
 class TempServerModel {
-  TempServerModel({this.day, this.max, min});
+  TempServerModel({this.day, this.max, this.min});
 
   double? day;
   double? max;

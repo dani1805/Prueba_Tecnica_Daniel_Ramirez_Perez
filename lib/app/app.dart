@@ -39,8 +39,13 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         BlocProvider(
           create:
               (_) =>
-                  getIt<HomeBloc>()
-                    ..add(DoGetWeather(lat: 51.6195, lon: -0.3337)),
+                  getIt<HomeBloc>()..add(
+                    DoGetWeather(
+                      lat: 51.6195,
+                      lon: -0.3337,
+                      lang: context.locale.languageCode,
+                    ),
+                  ),
         ),
       ],
       child: GetMaterialApp(

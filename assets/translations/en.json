@@ -31,5 +31,10 @@
         "hint-email": "Email",
         "button-send-form-contact": "Send",
         "text-dialog-sent-to": "Sent to"
+    },
+
+    "weather-screen": {
+        "morning": "Morning"
     }
+
 }

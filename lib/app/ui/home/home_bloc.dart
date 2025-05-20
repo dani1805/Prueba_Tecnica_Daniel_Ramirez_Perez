@@ -26,6 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         weatherResponseModel = await weatherRepository.getWeather(
           event.lat,
           event.lon,
+          event.lang,
         );
         emit(HomeLoaded());
       } on MException catch (exception) {

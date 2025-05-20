@@ -6,17 +6,25 @@ import 'package:prueba_tecnica_daniel_ramirez/config/service_locator.dart';
 
 abstract class ApiWeatherRequestImpl {
   factory ApiWeatherRequestImpl() => ApiWeatherRequest();
-  Future<WeatherResponseServerModel> getWeather(double lat, double lon);
+  Future<WeatherResponseServerModel> getWeather(
+    double lat,
+    double lon,
+    String lang,
+  );
 }
 
 class ApiWeatherRequest implements ApiWeatherRequestImpl {
   final dio = getIt<Dio>();
 
   @override
-  Future<WeatherResponseServerModel> getWeather(double lat, double lon) async {
+  Future<WeatherResponseServerModel> getWeather(
+    double lat,
+    double lon,
+    String lang,
+  ) async {
     try {
       final response = await dio.get(
-        'onecall?lat=$lat&lon=$lon&appid=e1e1c2623e69bff2a4da4bbddc049de6&exclude=minutely&units=metric&lang=sp',
+        'onecall?lat=$lat&lon=$lon&appid=e1e1c2623e69bff2a4da4bbddc049de6&exclude=minutely&units=metric&lang=$lang',
       );
 
       if (response.statusCode == 200) {

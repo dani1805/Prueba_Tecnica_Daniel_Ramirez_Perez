@@ -12,6 +12,7 @@
         "Enviado",
         "Enviar",
         "Fecha",
+        "Grados",
         "idioma",
         "incluir",
         "Introduzca",
@@ -25,10 +26,13 @@
         "número",
         "onecall",
         "otra",
+        "Precipitación",
         "Prefs",
         "Selecciona",
         "Singapur",
         "Teléfono",
-        "tener"
+        "Temperatura",
+        "tener",
+        "Viento"
     ]
 }
