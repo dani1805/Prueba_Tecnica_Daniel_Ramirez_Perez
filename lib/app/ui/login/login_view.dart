@@ -8,6 +8,7 @@ import 'package:prueba_tecnica_daniel_ramirez/app/helpers/colors.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/error_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/helpers/validators.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/login/login_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_app_bar.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_button.dart';
@@ -32,6 +33,7 @@ class _LoginViewState extends State<LoginView> {
   late Size size;
   late LoginBloc bloc;
   late AuthenticationBloc authenticationBloc;
+  late HomeBloc homeBloc;
 
   @override
   void dispose() {
@@ -48,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
       context,
       listen: true,
     );
+    homeBloc = BlocProvider.of<HomeBloc>(context, listen: true);
 
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) async {
@@ -61,6 +64,13 @@ class _LoginViewState extends State<LoginView> {
             break;
           case LoginSuccess:
             authenticationBloc.add(DoAuthenticated(value: 'app-token'));
+            homeBloc.add(
+              DoGetWeather(
+                lat: 51.6195,
+                lon: -0.3337,
+                lang: context.locale.languageCode,
+              ),
+            );
             break;
         }
       },

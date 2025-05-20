@@ -3,9 +3,9 @@ import 'package:prueba_tecnica_daniel_ramirez/app/data/entity/server/temp_server
 class TempModel {
   TempModel({required this.day, required this.max, required this.min});
 
-  double day;
-  double max;
-  double min;
+  dynamic day;
+  dynamic max;
+  dynamic min;
 
   factory TempModel.fromServer(TempServerModel serverModel) => TempModel(
     day: serverModel.day ?? 0,

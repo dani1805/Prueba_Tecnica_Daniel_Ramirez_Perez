@@ -62,91 +62,79 @@ class _HomeViewState extends State<HomeView>
     homeBloc = BlocProvider.of<HomeBloc>(context, listen: true);
     weatherResponseModel = homeBloc.weatherResponseModel;
 
-    return BlocConsumer<HomeBloc, HomeState>(
-      listener: (context, state) async {
-        switch (state.runtimeType) {
-          case HomeError:
-            state = state as HomeError;
-            final code = state.code;
-            final message = state.message;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: StandardAppBar(
+        elevation: 0,
+        background: MColor.blue,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: doUnauthenticated,
+              child: Icon(Icons.logout, color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      body: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            bottom: TabBar(
+              controller: tabController,
+              indicatorColor: Colors.transparent,
+              labelColor: MColor.blue,
+              tabs: [
+                Tab(
+                  child: Text(
+                    'home-page.title-tab-london'.tr(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'home-page.title-tab-singapur'.tr(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'home-page.title-tab-toronto'.tr(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'home-page.title-tab-contact'.tr(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: BlocConsumer<HomeBloc, HomeState>(
+            listener: (context, state) async {
+              switch (state.runtimeType) {
+                case HomeError:
+                  state = state as HomeError;
+                  final code = state.code;
+                  final message = state.message;
 
-            ErrorHandler.handler(context, code, message);
-            break;
-          case HomeSuccess:
-            doShowDialog();
-            break;
-        }
-      },
-      builder: (context, state) {
-        switch (state.runtimeType) {
-          case HomeLoading:
-            return StandardLoading();
-          default:
-            return Scaffold(
-              backgroundColor: Colors.white,
-              appBar: StandardAppBar(
-                elevation: 0,
-                background: MColor.blue,
-                actions: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 10),
-                    child: GestureDetector(
-                      onTap: doUnauthenticated,
-                      child: Icon(Icons.logout, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-              body: DefaultTabController(
-                length: 4,
-                child: Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: Colors.white,
-                    bottom: TabBar(
-                      controller: tabController,
-                      indicatorColor: Colors.transparent,
-                      labelColor: MColor.blue,
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            'home-page.title-tab-london'.tr(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'home-page.title-tab-singapur'.tr(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'home-page.title-tab-toronto'.tr(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'home-page.title-tab-contact'.tr(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  body: TabBarView(
+                  ErrorHandler.handler(context, code, message);
+                  break;
+                case HomeSuccess:
+                  doShowDialog();
+                  break;
+              }
+            },
+            builder: (context, state) {
+              switch (state.runtimeType) {
+                case HomeLoading:
+                  return StandardLoading();
+                default:
+                  return TabBarView(
                     controller: tabController,
                     children: [
                       WeatherScreen(weatherResponseModel: weatherResponseModel),
@@ -154,12 +142,12 @@ class _HomeViewState extends State<HomeView>
                       WeatherScreen(weatherResponseModel: weatherResponseModel),
                       FormContact(),
                     ],
-                  ),
-                ),
-              ),
-            );
-        }
-      },
+                  );
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 

@@ -10,11 +10,11 @@ class DoSendFormContact extends HomeEvent {
 }
 
 class DoGetWeather extends HomeEvent {
-  final double lat;
-  final double lon;
+  final double? lat;
+  final double? lon;
   final String lang;
 
-  DoGetWeather({required this.lat, required this.lon, required this.lang});
+  DoGetWeather({this.lat, this.lon, required this.lang});
 
   @override
   List<Object?> get props => throw UnimplementedError();

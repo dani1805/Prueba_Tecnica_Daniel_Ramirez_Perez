@@ -9,9 +9,9 @@ class CurrentModel {
     required this.weather,
   });
 
-  double temp;
-  double windSpeed;
-  double uvi;
+  dynamic temp;
+  dynamic windSpeed;
+  dynamic uvi;
   List<WeatherModel> weather;
 
   factory CurrentModel.fromServer(CurrentServerModel serverModel) =>

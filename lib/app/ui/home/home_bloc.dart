@@ -10,6 +10,9 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final WeatherRepositoryImpl weatherRepository;
+  double latitude = 51.6195;
+  double longitude = -0.3337;
+
   WeatherResponseModel weatherResponseModel = WeatherResponseModel.fromServer(
     WeatherResponseServerModel(),
   );
@@ -23,9 +26,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DoGetWeather>((event, emit) async {
       emit(HomeLoading());
       try {
+        if (event.lat != null && event.lon != null) {
+          latitude = event.lat!;
+          longitude = event.lon!;
+        }
+
         weatherResponseModel = await weatherRepository.getWeather(
-          event.lat,
-          event.lon,
+          latitude,
+          longitude,
           event.lang,
         );
         emit(HomeLoaded());

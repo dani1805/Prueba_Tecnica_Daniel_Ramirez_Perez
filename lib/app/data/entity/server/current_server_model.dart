@@ -3,9 +3,9 @@ import 'package:prueba_tecnica_daniel_ramirez/app/data/entity/server/weather_ser
 class CurrentServerModel {
   CurrentServerModel({this.temp, this.windSpeed, this.uvi, this.weather});
 
-  double? temp;
-  double? windSpeed;
-  double? uvi;
+  dynamic temp;
+  dynamic windSpeed;
+  dynamic uvi;
   List<WeatherServerModel>? weather;
 
   factory CurrentServerModel.fromJson(Map<String, dynamic> json) =>

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/data/entity/models/weather_response_model.dart';
+import 'package:prueba_tecnica_daniel_ramirez/app/helpers/extension_handler.dart';
 import 'package:prueba_tecnica_daniel_ramirez/widgets/standard_temp_item.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -148,7 +149,8 @@ class WeatherScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 30),
                 Text(
-                  weatherResponseModel.daily.first.summary,
+                  weatherResponseModel.current.weather.first.description
+                      .capitalize(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,
@@ -162,7 +164,7 @@ class WeatherScreen extends StatelessWidget {
                   children: [
                     StandardTempItem(
                       weatherResponseModel: weatherResponseModel,
-                      title: 'weather-screen.morning'.tr(),
+                      title: 'weather-screen.tomorrow'.tr(),
                       index: 1,
                     ),
                     StandardTempItem(

@@ -1,7 +1,6 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:prueba_tecnica_daniel_ramirez/app/domain/weather_repository_impl.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/authentication/authentication_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_bloc.dart';
 import 'package:prueba_tecnica_daniel_ramirez/app/ui/home/home_page.dart';
@@ -39,13 +38,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
         BlocProvider(
           create:
               (_) =>
-                  getIt<HomeBloc>()..add(
-                    DoGetWeather(
-                      lat: 51.6195,
-                      lon: -0.3337,
-                      lang: context.locale.languageCode,
-                    ),
-                  ),
+                  getIt<HomeBloc>()
+                    ..add(DoGetWeather(lang: context.locale.languageCode)),
         ),
       ],
       child: GetMaterialApp(
